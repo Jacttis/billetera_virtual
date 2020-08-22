@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "482362742552",
+    "firebase_url": "https://billeteravirtual-92474.firebaseio.com",
+    "project_id": "billeteravirtual-92474",
+    "storage_bucket": "billeteravirtual-92474.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482362742552:android:be3fb18cf56aeeb4b2306d",
+        "android_client_info": {
+          "package_name": "com.jacttis.billetera_virtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482362742552-qsa17pvaskibfsvd1onpl2o21bkevo02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkGOXQ6qYx_OmbeTWBdv6SadYCJdfyry4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482362742552-qsa17pvaskibfsvd1onpl2o21bkevo02.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
