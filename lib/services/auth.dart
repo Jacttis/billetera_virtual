@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
   //create user obj on FirebaseUSer
   User _userFromFirebaseUser(FirebaseUser user){
     return user != null ? User(uid: user.uid) :null;
