@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
-          backgroundColor: Colors.grey[300],
+          backgroundColor: Colors.deepPurple[400],
           color: Colors.deepPurple[400],
           items: <Widget>[
             Icon(Icons.account_balance_wallet, size: 30),
@@ -46,6 +46,7 @@ class _HomeState extends State<Home> {
           },
         ),
         body: Container(
+          padding: EdgeInsets.only(bottom: 10.40),
           decoration:BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,

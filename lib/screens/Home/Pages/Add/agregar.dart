@@ -1,3 +1,4 @@
+import 'package:billetera_virtual/models/TextoModificado.dart';
 import 'package:billetera_virtual/models/User.dart';
 import 'package:billetera_virtual/services/auth.dart';
 import 'package:billetera_virtual/services/database.dart';
@@ -13,10 +14,15 @@ class Agregar extends StatefulWidget {
 
 class _AgregarState extends State<Agregar> {
   final AuthService _auth = AuthService();
+  static LinearGradient myGradient =LinearGradient(colors: [Colors.purpleAccent[700],Colors.purpleAccent[400],Colors.purpleAccent[100]]
+
+
+  );
 
   GlobalKey _textNumber = GlobalKey();
 
   final _controller=TextEditingController();
+  InputDecoration _toggle=textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.attach_money),);
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +46,59 @@ class _AgregarState extends State<Agregar> {
       body: Container(
         child: Column(
           children: <Widget>[
-            ButtonBar(
-              children: [
-                RaisedButton(
-                  child: Text("Gasto"),
-                  onPressed: (){
-                   setState(() {
-                     _controller.text='-0';
-                   });
-                  },
-                ),
-                RaisedButton(
-                  child: Text("Ingreso"),
-                ),
+            Center(
+              child: ButtonBar(
 
-              ],
+                children: [
+                RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _toggle=TextoModificado().devolverNegativo();
+                      });
+                    },
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                padding: const EdgeInsets.all(0.0),
+                child: Ink(
+                  decoration:  BoxDecoration(
+                    gradient: myGradient,
+                    borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                  ),
+                  child: Container(
+                    constraints: const BoxConstraints(minWidth: 120.0, minHeight: 36.0), // min sizes for Material buttons
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Gasto',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ),
+                  RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        _toggle=TextoModificado().devolverPositivo();
+                      });
+                    },
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                    padding: const EdgeInsets.all(0.0),
+                    child: Ink(
+                      decoration:  BoxDecoration(
+                        gradient: myGradient,
+                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      ),
+                      child: Container(
+                        constraints: const BoxConstraints(minWidth: 120.0, minHeight: 36.0), // min sizes for Material buttons
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Ingreso',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
             ),
             SizedBox(height: 20.0,),
             TextFormField(
@@ -63,7 +107,7 @@ class _AgregarState extends State<Agregar> {
               style: TextStyle(
                 fontSize: 25,
               ),
-              decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.attach_money),),
+              decoration: _toggle,
               textAlign: TextAlign.right,
               controller: _controller,
             )
