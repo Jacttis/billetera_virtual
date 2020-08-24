@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>482362742552-9d4otdpr9mvp3hqdhdb7vq7jgc0eaeq3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.482362742552-9d4otdpr9mvp3hqdhdb7vq7jgc0eaeq3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCs8vUOAliGjKF7EzM6TnBr42z_z6UxtTk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>482362742552</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.billeteraVirtual</string>
+	<key>PROJECT_ID</key>
+	<string>billeteravirtual-92474</string>
+	<key>STORAGE_BUCKET</key>
+	<string>billeteravirtual-92474.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:482362742552:ios:2a6732f322585c0bb2306d</string>
+	<key>DATABASE_URL</key>
+	<string>https://billeteravirtual-92474.firebaseio.com</string>
+</dict>
+</plist>

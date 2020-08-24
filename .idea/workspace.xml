@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4917c1af-4c39-4239-ba7b-8486d0850fd1" name="Default Changelist" comment="" />
+    <list default="true" id="4917c1af-4c39-4239-ba7b-8486d0850fd1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/billetera_virtual_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/billetera_virtual_android.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +30,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/billetera_virtual" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1gJw50k7Ccjun39Hyd4IvcA5mGa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -28,6 +43,7 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/screens/Authenticate" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -50,22 +66,35 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1491" height="208" key="GridCell.Tab.0.bottom" timestamp="1597979399162">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="962" height="117" key="GridCell.Tab.0.bottom" timestamp="1598304508462">
+      <screen x="0" y="23" width="1024" height="697" />
     </state>
     <state width="1491" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597979399162" />
-    <state width="1491" height="208" key="GridCell.Tab.0.center" timestamp="1597979399162">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="962" height="117" key="GridCell.Tab.0.bottom/0.23.1024.697@0.23.1024.697" timestamp="1598304508462" />
+    <state width="962" height="117" key="GridCell.Tab.0.center" timestamp="1598304508459">
+      <screen x="0" y="23" width="1024" height="697" />
     </state>
     <state width="1491" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597979399162" />
-    <state width="1491" height="208" key="GridCell.Tab.0.left" timestamp="1597979399162">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="962" height="117" key="GridCell.Tab.0.center/0.23.1024.697@0.23.1024.697" timestamp="1598304508459" />
+    <state width="962" height="117" key="GridCell.Tab.0.left" timestamp="1598304508457">
+      <screen x="0" y="23" width="1024" height="697" />
     </state>
     <state width="1491" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597979399162" />
-    <state width="1491" height="208" key="GridCell.Tab.0.right" timestamp="1597979399162">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="962" height="117" key="GridCell.Tab.0.left/0.23.1024.697@0.23.1024.697" timestamp="1598304508457" />
+    <state width="962" height="117" key="GridCell.Tab.0.right" timestamp="1598304508461">
+      <screen x="0" y="23" width="1024" height="697" />
     </state>
     <state width="1491" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597979399162" />
+    <state width="962" height="117" key="GridCell.Tab.0.right/0.23.1024.697@0.23.1024.697" timestamp="1598304508461" />
+    <state x="13" y="23" key="SettingsEditor" timestamp="1598304678634">
+      <screen x="0" y="23" width="1024" height="697" />
+    </state>
+    <state x="13" y="23" key="SettingsEditor/0.23.1024.697@0.23.1024.697" timestamp="1598304678634" />
+    <state x="13" y="23" key="SettingsEditor/0.23.1024.700@0.23.1024.700" timestamp="1598304269895" />
+    <state x="161" y="205" key="com.intellij.ide.util.TipDialog" timestamp="1598304175383">
+      <screen x="0" y="23" width="1024" height="700" />
+    </state>
+    <state x="161" y="205" key="com.intellij.ide.util.TipDialog/0.23.1024.700@0.23.1024.700" timestamp="1598304175383" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1597868468178">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
