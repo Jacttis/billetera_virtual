@@ -13,25 +13,28 @@ class Cuenta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context); // devuelve el usuario activo
-    return StreamProvider<List<Recibo>>.value(
-      value: DatabaseService(uid: user.uid).obtenerRecibos(),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text('Cuenta'),
+    return StreamProvider<List<Text>>.value( //Devuelve un Stream de una lista de ID de recibos
+      value:DatabaseService(uid:user.uid).obtenerIDRecibo(),//aca se obtiene el valor del stream
+      child: StreamProvider<List<Recibo>>.value(
+        value: DatabaseService(uid: user.uid).obtenerRecibos(),
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          actions: <Widget>[
-            FlatButton.icon(
-                onPressed: ()async {
-                  await _auth.singOut();
+          appBar: AppBar(
+            title: Text('Cuenta'),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            actions: <Widget>[
+              FlatButton.icon(
+                  onPressed: ()async {
+                    await _auth.singOut();
 
-                },
-                icon: Icon(Icons.person),
-                label: Text('logout'))
-          ],
+                  },
+                  icon: Icon(Icons.person),
+                  label: Text('logout'))
+            ],
+          ),
+          body: HistorialList(),
         ),
-        body: HistorialList(),
       ),
     );
   }

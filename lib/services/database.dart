@@ -2,6 +2,7 @@
 import 'package:billetera_virtual/models/Recibo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class DatabaseService {
@@ -30,7 +31,7 @@ class DatabaseService {
 
     });
   }
-
+// Añado un Recibo a la base de datos de dicho user con la descripcion (desc) y la cantidad(cant) pasada como parametro
   Future addRecibo(String desc,double cant) async {
 
    return await collection.document(uid).collection('Recibos').document().setData({
@@ -38,6 +39,29 @@ class DatabaseService {
       'cantidad': cant
     });
 
+  }
+
+  //Devuelve una lista de text(a partir de un snapshot)
+  List<Text> _stringListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      print(doc.data['descripcion']);
+      return Text(doc.documentID);
+    }).toList();
+  }
+
+ // A partir de todos los recibos devuelvo un Stream mapeandolo a una lista de Text() con _stringListFromSnapshot()
+  Stream<List<Text>>  obtenerIDRecibo(){
+    String path ='/Historiales/$uid/Recibos';
+    print(path);
+    return firestoreInstance.collection(path).snapshots().map(_stringListFromSnapshot);
+
+  }
+
+  //A partir de un ID de un recibo lo elimino de la base de datos.
+  Future deleteRecibo(String reciboID) async {
+    return await collection.document(uid).collection('Recibos')
+        .document(reciboID)
+        .delete();
   }
 
 
