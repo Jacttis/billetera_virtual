@@ -46,59 +46,57 @@ class _AgregarState extends State<Agregar> {
       body: Container(
         child: Column(
           children: <Widget>[
-            Center(
-              child: ButtonBar(
+            ButtonBar(
 
-                children: [
-                RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        _toggle=TextoModificado().devolverNegativo();
-                      });
-                    },
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                padding: const EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration:  BoxDecoration(
-                    gradient: myGradient,
-                    borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                  ),
-                  child: Container(
-                    constraints: const BoxConstraints(minWidth: 120.0, minHeight: 36.0), // min sizes for Material buttons
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Gasto',
-                      textAlign: TextAlign.center,
-                    ),
+              children: [
+              RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      _toggle=TextoModificado().devolverNegativo();
+                    });
+                  },
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+              padding: const EdgeInsets.all(0.0),
+              child: Ink(
+                decoration:  BoxDecoration(
+                  gradient: myGradient,
+                  borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                ),
+                child: Container(
+                  constraints: const BoxConstraints(minWidth: 120.0, minHeight: 36.0), // min sizes for Material buttons
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'Gasto',
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                ),
-                  RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        _toggle=TextoModificado().devolverPositivo();
-                      });
-                    },
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration:  BoxDecoration(
-                        gradient: myGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(minWidth: 120.0, minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Ingreso',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
               ),
+              ),
+                RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      _toggle=TextoModificado().devolverPositivo();
+                    });
+                  },
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                  padding: const EdgeInsets.all(0.0),
+                  child: Ink(
+                    decoration:  BoxDecoration(
+                      gradient: myGradient,
+                      borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    ),
+                    child: Container(
+                      constraints: const BoxConstraints(minWidth: 120.0, minHeight: 36.0), // min sizes for Material buttons
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Ingreso',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+
+              ],
             ),
             SizedBox(height: 20.0,),
             TextFormField(
@@ -110,6 +108,18 @@ class _AgregarState extends State<Agregar> {
               decoration: _toggle,
               textAlign: TextAlign.right,
               controller: _controller,
+            ),
+            SizedBox(height: 20.0,),  
+            TextFormField(
+              style: TextStyle(
+                fontSize: 25,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Descripcion',
+                contentPadding: new EdgeInsets.symmetric(vertical: 40.0, horizontal: 10.0),
+                border: OutlineInputBorder(borderSide: new BorderSide(color: Colors.teal))
+              ),
+              textAlign: TextAlign.right,
             )
 
           ],

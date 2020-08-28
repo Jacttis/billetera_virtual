@@ -16,7 +16,7 @@ class DatabaseService {
       'Historiales');
   final firestoreInstance = Firestore.instance;
 
-  // Hace un update de la base de datos del usuario al crear una cuenta de en la apliacion
+  // Hace un update de la base de datos del usuario al crear una cuenta de en la aplicacion
 
   Future updateUserData(String name, String moneda,double total) async {
 
@@ -68,7 +68,6 @@ class DatabaseService {
   //historial lista(Recibe snapshots y las devuelve como una lista de recibos en este caso)
   List<Recibo> _reciboListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      print(doc.data['descripcion']);
       return Recibo(
           cant: doc.data['cantidad'] ?? 0.0,
           descripcion: doc.data['descripcion'] ?? ''
@@ -77,7 +76,6 @@ class DatabaseService {
   }
 //Esto se llama en la pagina Home para que al obtener recibos consulte la base de datos y la devuelva mapeando al metodo _reciboFromsnapshot
   Stream<List<Recibo>> obtenerRecibos() {
-    print(uid);
     String path ='/Historiales/$uid/Recibos';
     print(path);
     return firestoreInstance.collection(path).snapshots().map(_reciboListFromSnapshot);

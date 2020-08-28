@@ -2,7 +2,6 @@ import 'package:billetera_virtual/models/Recibo.dart';
 import 'package:billetera_virtual/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_skeleton/flutter_skeleton.dart';
 
 class HistorialTile extends StatelessWidget {
   final Recibo recibo;

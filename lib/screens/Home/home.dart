@@ -1,5 +1,5 @@
 import 'package:billetera_virtual/screens/Home/Pages/Add/agregar.dart';
-import 'package:billetera_virtual/screens/Home/Pages/Cuenta.dart';
+import 'package:billetera_virtual/screens/Home/Pages/Cuenta/Cuenta.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
 
-  final Cuenta _cuenta = Cuenta();
+  final Cuenta _cuenta = Cuenta() ;
   final Agregar _agregar=Agregar();
 
   Widget _showPage=new Cuenta();
