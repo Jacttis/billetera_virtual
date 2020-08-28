@@ -16,7 +16,7 @@ class HistorialList extends StatefulWidget {
 class _HistorialListState extends State<HistorialList> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    //final user = Provider.of<User>(context);
     final historial = Provider.of<List<Recibo>>(context) ?? [];
     final recibos=Provider.of<List<Text>>(context) ?? [];
 
@@ -92,7 +92,7 @@ class _HistorialListState extends State<HistorialList> {
                         // Remove the item from the data source.
                         setState(() {
                           historial.removeAt(index);
-                          DatabaseService(uid: user.uid).deleteRecibo(recibos.elementAt(index).data);
+                          DatabaseService.getInstaceC().deleteRecibo(recibos.elementAt(index).data);
                         });
 
                         // Show a snackbar. This snackbar could also contain "Undo" actions.

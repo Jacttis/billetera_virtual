@@ -14,9 +14,9 @@ class Cuenta extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context); // devuelve el usuario activo
     return StreamProvider<List<Text>>.value( //Devuelve un Stream de una lista de ID de recibos
-      value:DatabaseService(uid:user.uid).obtenerIDRecibo(),//aca se obtiene el valor del stream
+      value:DatabaseService.getInstaceC().obtenerIDRecibo(),//aca se obtiene el valor del stream
       child: StreamProvider<List<Recibo>>.value(
-        value: DatabaseService(uid: user.uid).obtenerRecibos(),
+        value: DatabaseService.getInstaceC().obtenerRecibos(),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(

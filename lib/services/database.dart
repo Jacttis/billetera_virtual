@@ -7,9 +7,23 @@ import 'package:provider/provider.dart';
 
 class DatabaseService {
 
-  final  String uid;
+   String uid;
+  static DatabaseService _instance=null;
 
-  DatabaseService({this.uid});
+  DatabaseService._internal(String uidd){
+    uid=uidd;
+  }
+
+  static DatabaseService getInstance(String uid){
+    if(_instance==null){
+      _instance=new DatabaseService._internal(uid);
+    }
+      return _instance;
+
+  }
+  static DatabaseService getInstaceC(){
+    return _instance;
+  }
 
   //collection reference
   final CollectionReference collection = Firestore.instance.collection(
