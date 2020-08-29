@@ -12,6 +12,27 @@ const textInputDecoration = InputDecoration(
   ),
 );
 
+TextFormField entradaCantidadPositiva= TextFormField(
+
+  keyboardType: TextInputType.number,
+  style: TextStyle(
+    fontSize: 25,
+
+
+  ),
+  decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.add,color: Colors.black,)),
+  textAlign: TextAlign.right,
+);
+
+TextFormField entradaCantidadNegative= TextFormField(
+
+  keyboardType: TextInputType.number,
+  style: TextStyle(
+    fontSize: 25,
+  ),
+  decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.remove,color: Colors.black,),),
+  textAlign: TextAlign.right,
+);
 /*const gradiente = BoxDecoration(
   gradient: LinearGradient(
       begin: Alignment.topCenter,
