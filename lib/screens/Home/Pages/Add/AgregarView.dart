@@ -1,9 +1,13 @@
+import 'package:billetera_virtual/models/User.dart';
+import 'package:billetera_virtual/screens/Home/Pages/Add/AgregarImagen.dart';
 import 'package:billetera_virtual/services/auth.dart';
+import 'package:billetera_virtual/services/storage.dart';
 import 'package:billetera_virtual/shared/constans.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
 import 'TextoModificado.dart';
 
@@ -18,10 +22,12 @@ class _AgregarViewState extends State<AgregarView> {
   String valor='GASTO';
   TextFormField textoEntrada=entradaCantidadNegative;
   File image;
+  AgregarImagen logicaFoto=AgregarImagen();
 
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return Container(
       child: ListView(
         children: <Widget>[
@@ -109,12 +115,31 @@ class _AgregarViewState extends State<AgregarView> {
           SizedBox(height:10.0),
           Row(
             children: [
-              SizedBox(width: 260,),
+              SizedBox(width: 50,),
+              Container(
+                width: 100,
+                height: 100,
+                child:GestureDetector(
+                  child:(image!=null)?Image.file(image,fit: BoxFit.fill,):null,
+                  onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(image: image);
+                  }));},
+                ),
+              ),
+              SizedBox(width: 50,),
               RaisedButton.icon(
                 textColor: Colors.white,
                 color: Colors.black87,
                 label: Text('Subir Imagen'),
-                onPressed: (){},
+                onPressed: ()async {
+                    image= await logicaFoto.getImage();
+                    setState(() {
+                      // ignore: unnecessary_statements
+                      image;
+                    });
+                  //StorageService(uid: user.uid).startUpload(image);
+                  },
                 icon: Icon(Icons.cloud_upload),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -126,6 +151,30 @@ class _AgregarViewState extends State<AgregarView> {
 
         ],
 
+      ),
+    );
+  }
+
+
+
+}
+
+class DetailScreen extends StatelessWidget {
+  File image;
+  DetailScreen({this.image});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: 'imageHero',
+            child: Image.file(image,fit: BoxFit.fill,),
+          ),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

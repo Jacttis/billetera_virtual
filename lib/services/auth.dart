@@ -70,6 +70,7 @@ class AuthService{
   //sign out
   Future singOut() async{
     try{
+      DatabaseService.SignOut();
       return await _auth.signOut();
     }
     catch(e){

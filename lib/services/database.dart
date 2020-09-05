@@ -25,6 +25,10 @@ class DatabaseService {
     return _instance;
   }
 
+  static void SignOut(){
+    _instance=null;
+  }
+
   //collection reference
   final CollectionReference collection = Firestore.instance.collection(
       'Historiales');
@@ -46,11 +50,12 @@ class DatabaseService {
     });
   }
 // Añado un Recibo a la base de datos de dicho user con la descripcion (desc) y la cantidad(cant) pasada como parametro
-  Future addRecibo(String desc,double cant) async {
+  Future addRecibo(String desc,double cant,String path) async {
 
    return await collection.document(uid).collection('Recibos').document().setData({
       'descripcion': desc,
-      'cantidad': cant
+      'cantidad': cant,
+      'path':path
     });
 
   }
@@ -84,7 +89,8 @@ class DatabaseService {
     return snapshot.documents.map((doc) {
       return Recibo(
           cant: doc.data['cantidad'] ?? 0.0,
-          descripcion: doc.data['descripcion'] ?? ''
+          descripcion: doc.data['descripcion'] ?? '',
+          path: 'gs://billeteravirtual-92474.appspot.com/1AfgAlDOVgdGocVAuAfIE2pwLPS2/storage/emulated/0/Android/data/com.jacttis.billetera_virtual/files/Pictures/30e3f1e4-4f4d-4766-89cf-03726d731bde8130336375952141148.jpg'
       );
     }).toList();
   }

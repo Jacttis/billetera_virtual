@@ -25,7 +25,6 @@ TextFormField entradaCantidadPositiva= TextFormField(
 );
 
 TextFormField entradaCantidadNegative= TextFormField(
-
   keyboardType: TextInputType.number,
   style: TextStyle(
     fontSize: 25,
