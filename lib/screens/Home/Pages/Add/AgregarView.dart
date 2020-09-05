@@ -1,6 +1,7 @@
 import 'package:billetera_virtual/models/User.dart';
 import 'package:billetera_virtual/screens/Home/Pages/Add/AgregarImagen.dart';
 import 'package:billetera_virtual/services/auth.dart';
+import 'package:billetera_virtual/services/database.dart';
 import 'package:billetera_virtual/services/storage.dart';
 import 'package:billetera_virtual/shared/constans.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,10 +20,42 @@ class AgregarView extends StatefulWidget {
 
 class _AgregarViewState extends State<AgregarView> {
 
+  static  TextFormField entradaCantidadPositiva= TextFormField(
+    onChanged: (num){
+      number=double.parse(num);
+    },
+    controller: numero,
+    keyboardType: TextInputType.number,
+    style: TextStyle(
+      fontSize: 25,
+    ),
+    decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.add,color: Colors.black,)),
+    textAlign: TextAlign.right,
+  );
+
+  static TextFormField entradaCantidadNegativa= TextFormField(
+    onChanged: (num){
+      number=double.parse(num);
+      number=-number;
+    },
+    controller: numero,
+    keyboardType: TextInputType.number,
+    style: TextStyle(
+      fontSize: 25,
+    ),
+    decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.remove,color: Colors.black,),),
+    textAlign: TextAlign.right,
+  );
+
   String valor='GASTO';
-  TextFormField textoEntrada=entradaCantidadNegative;
+  TextFormField textoEntrada=entradaCantidadNegativa;
+  static TextEditingController numero = new TextEditingController();
   File image;
   AgregarImagen logicaFoto=AgregarImagen();
+  DatabaseService _databaseService = DatabaseService.getInstaceC();
+  String titulo;
+  static double number;
+  String descripcion;
 
 
   @override
@@ -52,7 +85,7 @@ class _AgregarViewState extends State<AgregarView> {
             radioButtonValue: (value) {
               setState(() {
                 if(value =='GASTO'){
-                  textoEntrada=entradaCantidadNegative;
+                  textoEntrada=entradaCantidadNegativa;
                 }
                 else{
                   textoEntrada=entradaCantidadPositiva;
@@ -83,6 +116,9 @@ class _AgregarViewState extends State<AgregarView> {
                 isDense: true,
               ),
               textAlign: TextAlign.right,
+              onChanged:(tit){
+                titulo=tit;
+              },
             ),
           ),
           SizedBox(height: 20.0,),
@@ -110,6 +146,9 @@ class _AgregarViewState extends State<AgregarView> {
                   isDense: true,
               ),
               textAlign: TextAlign.right,
+              onChanged:(Desc){
+                descripcion=Desc;
+              },
             ),
           ),
           SizedBox(height:10.0),
@@ -122,9 +161,11 @@ class _AgregarViewState extends State<AgregarView> {
                 child:GestureDetector(
                   child:(image!=null)?Image.file(image,fit: BoxFit.fill,):null,
                   onTap: () {
+                    if(image!=null){
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                   return DetailScreen(image: image);
-                  }));},
+
+                  }));}},
                 ),
               ),
               SizedBox(width: 50,),
@@ -146,7 +187,21 @@ class _AgregarViewState extends State<AgregarView> {
 
 
               ),
+
             ],
+          ),
+          SizedBox(height: 50,),
+          RaisedButton(
+            color: Colors.black,
+            textColor: Colors.white,
+            child: Text('Crear'),
+            onPressed: (){
+              _databaseService.addRecibo(descripcion,number,'',titulo);
+              Scaffold
+                  .of(context)
+                  .showSnackBar(SnackBar(content: Text(" Recibo Creado")));
+
+            },
           )
 
         ],
@@ -154,7 +209,6 @@ class _AgregarViewState extends State<AgregarView> {
       ),
     );
   }
-
 
 
 }

@@ -17,7 +17,7 @@ class _RegisterState extends State<Register> {
   final AuthService _authService= AuthService();
   final _formKey =GlobalKey<FormState>();
   final List<String> monedas=["Peso argentino","Euro","Dolar"];
-  //bool loading =false;
+  bool loading =false;
 
   String email='';
   String password1='';
@@ -105,13 +105,13 @@ class _RegisterState extends State<Register> {
                         onPressed: () async{
                           if(_formKey.currentState.validate()){
                             setState(() {
-                              //loading=true;
+                              loading=true;
                             });
                             dynamic result = await _authService.registerWithEmailAndPassword(email, password2,_currentmoneda);
-                            if(result == null){
+                            if(result == 'ERROR_EMAIL_ALREADY_IN_USE'){
                               setState(() {
-                                error = 'please supply a valid email ';
-                               // loading =false;
+                                error = 'Este email ya esta en uso ';
+                                loading =false;
                               });
                             }
                           }
@@ -127,7 +127,7 @@ class _RegisterState extends State<Register> {
                         label: Text('Sign In')),
                     Text(
                       error,
-                      style: TextStyle(color: Colors.red,fontSize: 14.0),
+                      style: TextStyle(color: Colors.red[700],fontSize: 17.0),
                     ),
                   ],
 

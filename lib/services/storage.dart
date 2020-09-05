@@ -16,6 +16,12 @@ class StorageService{
     print('Completado');
   }
 
+  Future getImage (String url) async{
+   _storage.ref().child(url).getDownloadURL();
+
+  }
+
+
 
 
 
