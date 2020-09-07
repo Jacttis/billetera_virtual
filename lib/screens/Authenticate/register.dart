@@ -114,6 +114,14 @@ class _RegisterState extends State<Register> {
                                 loading =false;
                               });
                             }
+                            else{
+                              if(result == 'ERROR_INVALID_EMAIL'){
+                                setState(() {
+                                  error = 'Ingrese un email valido ';
+                                  loading =false;
+                                });
+                              }
+                            }
                           }
                         },
                       ),

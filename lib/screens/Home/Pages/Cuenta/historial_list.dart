@@ -102,37 +102,12 @@ class _HistorialListState extends State<HistorialList> {
                       },
                       child: HistorialTile(recibo: historial[index]),
                     );
-
-                    return HistorialTile(recibo: historial[index]);
                   },
                 ),
           ),
         ],
       ),
     );
-
-
-
-    /*if(historial!= null) {
-         historial.forEach((recibo) {
-           print(recibo.cant);
-           print(recibo.descripcion);
-         });
-       }*/
-
-
-    /*  if(historial != null ) {
-      print("EntraPrimero");
-      for( var doc in historial.documents){
-        print("Entra");
-        print(doc.data['cantidad']);
-
-      }
-    }
-    else{
-      print('no fnciona');
-    }
-*/
 
 
   }

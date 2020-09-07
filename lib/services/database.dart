@@ -77,7 +77,7 @@ class DatabaseService {
   Stream<List<Text>>  obtenerIDRecibo(){
     String path ='/Historiales/$uid/Recibos';
     print(path);
-    return firestoreInstance.collection(path).snapshots().map(_stringListFromSnapshot);
+    return firestoreInstance.collection(path).orderBy('creado',descending: true).snapshots().map(_stringListFromSnapshot);
 
   }
 

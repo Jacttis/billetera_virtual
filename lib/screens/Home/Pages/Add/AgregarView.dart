@@ -10,7 +10,6 @@ import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
-import 'TextoModificado.dart';
 
 
 class AgregarView extends StatefulWidget {
@@ -21,10 +20,10 @@ class AgregarView extends StatefulWidget {
 class _AgregarViewState extends State<AgregarView> {
 
   static  TextFormField entradaCantidadPositiva= TextFormField(
+    controller: controladorNumero,
     onChanged: (num){
       number=double.parse(num);
     },
-    controller: numero,
     keyboardType: TextInputType.number,
     style: TextStyle(
       fontSize: 25,
@@ -34,11 +33,11 @@ class _AgregarViewState extends State<AgregarView> {
   );
 
   static TextFormField entradaCantidadNegativa= TextFormField(
+    controller: controladorNumero,
     onChanged: (num){
       number=double.parse(num);
       number=-number;
     },
-    controller: numero,
     keyboardType: TextInputType.number,
     style: TextStyle(
       fontSize: 25,
@@ -49,7 +48,9 @@ class _AgregarViewState extends State<AgregarView> {
 
   String valor='GASTO';
   TextFormField textoEntrada=entradaCantidadNegativa;
-  static TextEditingController numero = new TextEditingController();
+  static TextEditingController controladorTitulo = new TextEditingController();
+  static TextEditingController controladorDescripcion = new TextEditingController();
+  static TextEditingController controladorNumero=new TextEditingController();
   File image;
   AgregarImagen logicaFoto=AgregarImagen();
   DatabaseService _databaseService = DatabaseService.getInstaceC();
@@ -98,6 +99,7 @@ class _AgregarViewState extends State<AgregarView> {
           Container(
             margin: EdgeInsets.only(left: 40),
             child: TextFormField(
+              controller: controladorTitulo,
               style: TextStyle(
                 fontSize: 25,
               ),
@@ -128,6 +130,7 @@ class _AgregarViewState extends State<AgregarView> {
           Container(
             margin: EdgeInsets.only(left: 40),
             child: TextFormField(
+              controller: controladorDescripcion,
               style: TextStyle(
                 fontSize: 25,
               ),
@@ -197,6 +200,10 @@ class _AgregarViewState extends State<AgregarView> {
             child: Text('Crear'),
             onPressed: (){
               _databaseService.addRecibo(descripcion,number,'',titulo);
+              controladorTitulo.clear();
+              controladorDescripcion.clear();
+              textoEntrada.controller.clear();
+              image=null;
               Scaffold
                   .of(context)
                   .showSnackBar(SnackBar(content: Text(" Recibo Creado")));

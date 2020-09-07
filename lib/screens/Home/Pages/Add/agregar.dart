@@ -1,4 +1,4 @@
-import 'file:///D:/ProyectoDart/billetera_virtual/lib/screens/Home/Pages/Add/TextoModificado.dart';
+
 import 'package:billetera_virtual/models/User.dart';
 import 'package:billetera_virtual/screens/Home/Pages/Add/AgregarView.dart';
 import 'package:billetera_virtual/services/auth.dart';
