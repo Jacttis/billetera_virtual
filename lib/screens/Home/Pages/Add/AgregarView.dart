@@ -1,13 +1,11 @@
 import 'package:billetera_virtual/models/User.dart';
 import 'package:billetera_virtual/screens/Home/Pages/Add/AgregarImagen.dart';
-import 'package:billetera_virtual/services/auth.dart';
 import 'package:billetera_virtual/services/database.dart';
 import 'package:billetera_virtual/services/storage.dart';
 import 'package:billetera_virtual/shared/constans.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 
@@ -171,7 +169,7 @@ class _AgregarViewState extends State<AgregarView> {
                   }));}},
                 ),
               ),
-              SizedBox(width: 50,),
+              SizedBox(width: 110,),
               RaisedButton.icon(
                 textColor: Colors.white,
                 color: Colors.black87,
@@ -182,7 +180,6 @@ class _AgregarViewState extends State<AgregarView> {
                       // ignore: unnecessary_statements
                       image;
                     });
-                  //StorageService(uid: user.uid).startUpload(image);
                   },
                 icon: Icon(Icons.cloud_upload),
                 shape: RoundedRectangleBorder(
@@ -198,8 +195,12 @@ class _AgregarViewState extends State<AgregarView> {
             color: Colors.black,
             textColor: Colors.white,
             child: Text('Crear'),
-            onPressed: (){
-              _databaseService.addRecibo(descripcion,number,'',titulo);
+            onPressed: () async{
+              if(image!=null) {
+                var url = await StorageService(uid: user.uid).startUpload(image);
+                _databaseService.addRecibo(
+                    descripcion, number, url, titulo);
+              }
               controladorTitulo.clear();
               controladorDescripcion.clear();
               textoEntrada.controller.clear();

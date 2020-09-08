@@ -10,9 +10,7 @@ class HistorialTile extends StatelessWidget {
 
   HistorialTile({this.recibo});
   @override
-  Image imagen;
   Widget build(BuildContext context) {
-     foo();
     // Creo la Card para manejar la lista de recibos
     return Container(
       child: Column(
@@ -25,7 +23,7 @@ class HistorialTile extends StatelessWidget {
               child: ExpansionTile(
 
                 leading: CircleAvatar(
-                  child: imagen,
+                  backgroundImage: NetworkImage(recibo.path),
                   radius: 25,
                   backgroundColor: Colors.white70,
                 ),
@@ -44,8 +42,5 @@ class HistorialTile extends StatelessWidget {
 
   }
   
-  void foo()async{
-    imagen= await StorageService().getImage('/1AfgAlDOVgdGocVAuAfIE2pwLPS2/storage/emulated/0/Android/data/com.jacttis.billetera_virtual/files/Pictures/30e3f1e4-4f4d-4766-89cf-03726d731bde8130336375952141148.jpg');
-  }
   
 }

@@ -95,7 +95,7 @@ class DatabaseService {
       return Recibo(
           cant: doc.data['cantidad'] ?? 0.0,
           descripcion: doc.data['descripcion'] ?? '',
-          path: '',
+          path: doc.data['path'] ?? '',
           titulo: doc.data['titulo']??''
       );
     }).toList();
