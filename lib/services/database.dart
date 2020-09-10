@@ -36,7 +36,7 @@ class DatabaseService {
 
   // Hace un update de la base de datos del usuario al crear una cuenta de en la aplicacion
 
-  Future updateUserData(String name, String moneda,double total) async {
+  Future updateUserData(String name, String moneda) async {
 
     await collection.document(uid).collection('Recibos').document().setData({
       'titulo': 'Nuevo miembro',
@@ -48,7 +48,6 @@ class DatabaseService {
     return await collection.document(uid).setData({
       'name': name,
       'moneda': moneda,
-      'total': total,
 
     });
   }

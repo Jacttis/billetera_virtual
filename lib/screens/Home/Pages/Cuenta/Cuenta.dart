@@ -23,15 +23,6 @@ class Cuenta extends StatelessWidget {
             title: Text('Cuenta'),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
-            actions: <Widget>[
-              FlatButton.icon(
-                  onPressed: ()async {
-                    await _auth.singOut();
-
-                  },
-                  icon: Icon(Icons.person),
-                  label: Text('logout'))
-            ],
           ),
           body: HistorialList(),
         ),

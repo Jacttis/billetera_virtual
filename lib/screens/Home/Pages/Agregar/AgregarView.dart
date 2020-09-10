@@ -1,5 +1,5 @@
 import 'package:billetera_virtual/models/User.dart';
-import 'package:billetera_virtual/screens/Home/Pages/Add/AgregarImagen.dart';
+import 'package:billetera_virtual/screens/Home/Pages/Agregar/AgregarImagen.dart';
 import 'package:billetera_virtual/screens/Home/Pages/detailsScreen.dart';
 import 'package:billetera_virtual/services/database.dart';
 import 'package:billetera_virtual/services/storage.dart';
@@ -178,7 +178,6 @@ class _AgregarViewState extends State<AgregarView> {
                 onPressed: ()async {
                     image= await logicaFoto.getImage();
                     setState(() {
-                      // ignore: unnecessary_statements
                       image;
                     });
                   },
@@ -205,7 +204,10 @@ class _AgregarViewState extends State<AgregarView> {
               controladorTitulo.clear();
               controladorDescripcion.clear();
               textoEntrada.controller.clear();
-              image=null;
+              setState(() {
+                image=null;
+              });
+
               Scaffold
                   .of(context)
                   .showSnackBar(SnackBar(content: Text(" Recibo Creado")));

@@ -38,7 +38,7 @@ class HistorialTile extends StatelessWidget {
                     backgroundColor: Colors.white70,
                   ),
                 ),
-                title: Text('\$'+recibo.cant.toString(),style: TextStyle(color: Colors.white),),
+                title: recibo.cant>=0?Text('\$'+recibo.cant.toString(),style: TextStyle(color: Colors.green),):Text('\$'+recibo.cant.toString(),style: TextStyle(color: Colors.red),),
                 subtitle: Text(recibo.titulo,style: TextStyle(color: Colors.white),),
                 children: [
                   Text(recibo.descripcion,style: TextStyle(color: Colors.white),),

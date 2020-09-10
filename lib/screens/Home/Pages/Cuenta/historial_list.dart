@@ -33,7 +33,7 @@ class _HistorialListState extends State<HistorialList> {
 
       child: Column(
         children: <Widget>[
-          Text("Total:",style: TextStyle(fontSize:40.0 ),),
+          Text("Saldo:",style: TextStyle(fontSize:40.0 ),),
           Text("\$"+_calcularTotal().toStringAsFixed(3),style: TextStyle(fontSize: 34.0),),
           SizedBox(height: 20.0,),
           Expanded( // Expando el container para que entre en la aplicacion
