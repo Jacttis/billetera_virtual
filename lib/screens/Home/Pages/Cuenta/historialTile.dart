@@ -1,5 +1,6 @@
 import 'package:billetera_virtual/models/Recibo.dart';
 import 'package:billetera_virtual/models/User.dart';
+import 'package:billetera_virtual/screens/Home/Pages/detailsScreen.dart';
 import 'package:billetera_virtual/services/database.dart';
 import 'package:billetera_virtual/services/storage.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class HistorialTile extends StatelessWidget {
   final Recibo recibo;
-
+  final _key =  GlobalKey();
   HistorialTile({this.recibo});
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,20 @@ class HistorialTile extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
               child: ExpansionTile(
 
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(recibo.path),
-                  radius: 25,
-                  backgroundColor: Colors.white70,
+                leading: GestureDetector(
+                  onTap: (){
+                    if(recibo.path!=''){
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return DetailScreen.from(NetworkImage(recibo.path) );
+
+                      }));}
+                  },
+                  child: CircleAvatar(
+                    key: _key,
+                    backgroundImage: NetworkImage(recibo.path),
+                    radius: 25,
+                    backgroundColor: Colors.white70,
+                  ),
                 ),
                 title: Text('\$'+recibo.cant.toString(),style: TextStyle(color: Colors.white),),
                 subtitle: Text(recibo.titulo,style: TextStyle(color: Colors.white),),

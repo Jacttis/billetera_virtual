@@ -1,5 +1,6 @@
 import 'package:billetera_virtual/models/User.dart';
 import 'package:billetera_virtual/screens/Home/Pages/Add/AgregarImagen.dart';
+import 'package:billetera_virtual/screens/Home/Pages/detailsScreen.dart';
 import 'package:billetera_virtual/services/database.dart';
 import 'package:billetera_virtual/services/storage.dart';
 import 'package:billetera_virtual/shared/constans.dart';
@@ -164,7 +165,7 @@ class _AgregarViewState extends State<AgregarView> {
                   onTap: () {
                     if(image!=null){
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return DetailScreen(image: image);
+                  return DetailScreen(image);
 
                   }));}},
                 ),
@@ -221,23 +222,3 @@ class _AgregarViewState extends State<AgregarView> {
 
 }
 
-class DetailScreen extends StatelessWidget {
-  File image;
-  DetailScreen({this.image});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        child: Center(
-          child: Hero(
-            tag: 'imageHero',
-            child: Image.file(image,fit: BoxFit.fill,),
-          ),
-        ),
-        onTap: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
-  }
-}
