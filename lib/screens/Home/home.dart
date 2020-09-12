@@ -1,6 +1,7 @@
 import 'package:billetera_virtual/screens/Home/Pages/Agregar/agregar.dart';
-import 'package:billetera_virtual/screens/Home/Pages/Configuraciones/configuraciones.dart';
+import 'package:billetera_virtual/screens/Home/Pages/Mas/masPage.dart';
 import 'package:billetera_virtual/screens/Home/Pages/Cuenta/Cuenta.dart';
+import 'package:billetera_virtual/screens/Home/Pages/Mas/masPage.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _HomeState extends State<Home> {
 
   final Cuenta _cuenta = Cuenta() ;
   final Agregar _agregar=Agregar();
-  final Configuraciones _configuraciones=Configuraciones();
+  final MasPage _masPage=MasPage();
 
   Widget _showPage=new Cuenta();
 
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
     switch(page){
       case 0:return _cuenta;break;
       case 1:return _agregar;break;
-      case 2:return _configuraciones;break;
+      case 2:return _masPage;break;
     }
 
 
