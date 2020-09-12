@@ -67,7 +67,6 @@ class DatabaseService {
   //Devuelve una lista de text(a partir de un snapshot)
   List<Text> _stringListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      print(doc.data['descripcion']);
       return Text(doc.documentID);
     }).toList();
   }
@@ -75,7 +74,6 @@ class DatabaseService {
  // A partir de todos los recibos devuelvo un Stream mapeandolo a una lista de Text() con _stringListFromSnapshot()
   Stream<List<Text>>  obtenerIDRecibo(){
     String path ='/Historiales/$uid/Recibos';
-    print(path);
     return firestoreInstance.collection(path).orderBy('creado',descending: true).snapshots().map(_stringListFromSnapshot);
 
   }
@@ -102,7 +100,6 @@ class DatabaseService {
 //Esto se llama en la pagina Home para que al obtener recibos consulte la base de datos y la devuelva mapeando al metodo _reciboFromsnapshot
   Stream<List<Recibo>> obtenerRecibos() {
     String path ='/Historiales/$uid/Recibos';
-    print(path);
     return firestoreInstance.collection(path).orderBy('creado',descending: true).snapshots().map(_reciboListFromSnapshot);
   }
 
