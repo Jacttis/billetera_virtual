@@ -7,7 +7,7 @@ class DetailScreen extends StatelessWidget {
   DetailScreen(File image1){
     imagen=Image.file(image1);
   }
-  DetailScreen.from(NetworkImage net) {
+  DetailScreen.fromNetworkImage(NetworkImage net) {
     imagen=Image.network(net.url);
   }
 

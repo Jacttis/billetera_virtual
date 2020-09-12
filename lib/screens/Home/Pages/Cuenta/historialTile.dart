@@ -1,10 +1,7 @@
 import 'package:billetera_virtual/models/Recibo.dart';
-import 'package:billetera_virtual/models/User.dart';
 import 'package:billetera_virtual/screens/Home/Pages/detailsScreen.dart';
-import 'package:billetera_virtual/services/database.dart';
-import 'package:billetera_virtual/services/storage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 class HistorialTile extends StatelessWidget {
   final Recibo recibo;
@@ -27,7 +24,7 @@ class HistorialTile extends StatelessWidget {
                   onTap: (){
                     if(recibo.path!=''){
                       Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return DetailScreen.from(NetworkImage(recibo.path) );
+                        return DetailScreen.fromNetworkImage(NetworkImage(recibo.path) );
 
                       }));}
                   },
