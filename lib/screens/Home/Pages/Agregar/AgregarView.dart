@@ -17,9 +17,11 @@ class AgregarView extends StatefulWidget {
 }
 
 class _AgregarViewState extends State<AgregarView> {
-
-  static  TextFormField entradaCantidadPositiva= TextFormField(
-    controller: controladorNumero,
+         /*
+          * TextField que guarda el valor de la entrada numericaPositiva
+          * */
+  static  TextFormField _entradaCantidadPositiva= TextFormField(
+    controller: _controladorNumero,
     onChanged: (num){
       number=double.parse(num);
     },
@@ -30,9 +32,12 @@ class _AgregarViewState extends State<AgregarView> {
     decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.add,color: Colors.black,)),
     textAlign: TextAlign.right,
   );
+           /*
+          * TextField que guarda el valor de la entrada numericaNegativa
+          * */
 
-  static TextFormField entradaCantidadNegativa= TextFormField(
-    controller: controladorNumero,
+  static TextFormField _entradaCantidadNegativa= TextFormField(
+    controller: _controladorNumero,
     onChanged: (num){
       number=double.parse(num);
       number=-number;
@@ -44,15 +49,15 @@ class _AgregarViewState extends State<AgregarView> {
     decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.remove,color: Colors.black,),),
     textAlign: TextAlign.right,
   );
+  //Guarda el valor de la entrada dependiendo de si es un gasto o un ingreso
+  TextFormField _textoEntrada=_entradaCantidadNegativa;
 
-  String valor='GASTO';
-  TextFormField textoEntrada=entradaCantidadNegativa;
-  static TextEditingController controladorTitulo = new TextEditingController();
-  static TextEditingController controladorDescripcion = new TextEditingController();
-  static TextEditingController controladorNumero=new TextEditingController();
+  static TextEditingController _controladorTitulo = new TextEditingController();
+  static TextEditingController _controladorDescripcion = new TextEditingController();
+  static TextEditingController _controladorNumero=new TextEditingController();
   File image;
   AgregarImagen logicaFoto=AgregarImagen();
-  DatabaseService _databaseService = DatabaseService.getInstaceC();
+  DatabaseService databaseService = DatabaseService.getInstaceC();
   String titulo;
   static double number;
   String descripcion;
@@ -61,9 +66,13 @@ class _AgregarViewState extends State<AgregarView> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
     return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       child: ListView(
         children: <Widget>[
+          SizedBox(height: 20.0,),
           CustomRadioButton(
             elevation: 100,
             unSelectedColor: Colors.black12,
@@ -78,27 +87,35 @@ class _AgregarViewState extends State<AgregarView> {
               'GASTO',
               'INGRESO',
             ],
+
             buttonTextStyle: ButtonTextStyle(
                 selectedColor: Colors.white,
                 unSelectedColor: Colors.white38,
                 textStyle: TextStyle(fontSize: 16)),
+            /*
+            * Cambia el valor de la entrada de texto  depende de la opcion obtenida
+            * */
             radioButtonValue: (value) {
               setState(() {
                 if(value =='GASTO'){
-                  textoEntrada=entradaCantidadNegativa;
+                  _textoEntrada=_entradaCantidadNegativa;
                 }
                 else{
-                  textoEntrada=entradaCantidadPositiva;
+                  _textoEntrada=_entradaCantidadPositiva;
                 }
               });
             },
             selectedColor:Colors.deepPurple[500],
           ),
+
           SizedBox(height: 20.0,),
+          /*
+          * TextField que guarda el valor del titulo
+          * */
           Container(
             margin: EdgeInsets.only(left: 40),
             child: TextFormField(
-              controller: controladorTitulo,
+              controller: _controladorTitulo,
               style: TextStyle(
                 fontSize: 25,
               ),
@@ -122,14 +139,19 @@ class _AgregarViewState extends State<AgregarView> {
               },
             ),
           ),
-          SizedBox(height: 20.0,),
-          textoEntrada,
+
           SizedBox(height: 20.0,),
 
+          _textoEntrada,
+
+          SizedBox(height: 20.0,),
+          /*
+          * TextField que guarda el valor de la Descripcion
+          * */
           Container(
             margin: EdgeInsets.only(left: 40),
             child: TextFormField(
-              controller: controladorDescripcion,
+              controller: _controladorDescripcion,
               style: TextStyle(
                 fontSize: 25,
               ),
@@ -153,10 +175,17 @@ class _AgregarViewState extends State<AgregarView> {
               },
             ),
           ),
+
           SizedBox(height:10.0),
+
           Row(
             children: [
+
               SizedBox(width: 50,),
+              /*
+              * Container que contiene la imagen a subir , al hacer tap sobre esta
+              * se puede ver en patnalla completa
+              * */
               Container(
                 width: 100,
                 height: 100,
@@ -170,40 +199,57 @@ class _AgregarViewState extends State<AgregarView> {
                   }));}},
                 ),
               ),
-              SizedBox(width: 110,),
-              RaisedButton.icon(
-                textColor: Colors.white,
-                color: Colors.black87,
-                label: Text('Subir Imagen'),
-                onPressed: ()async {
-                    image= await logicaFoto.getImage();
-                    setState(() {
-                      image;
-                    });
-                  },
-                icon: Icon(Icons.cloud_upload),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+
+              //SizedBox(width: MediaQuery.of(context).size.width-330,),
+              /*
+              * Boton de subir imagen desde la camara
+              * */
+              Container(
+                alignment: Alignment.centerRight,
+                width:MediaQuery.of(context).size.width-150,
+                child: RaisedButton.icon(
+                  textColor: Colors.white,
+                  color: Colors.black87,
+                  label: Text('Subir Imagen'),
+                  onPressed: ()async {
+                      image= await logicaFoto.getImage();
+                      setState(() {
+                        // ignore: unnecessary_statements
+                        image;
+                      });
+                    },
+
+                  icon: Icon(Icons.cloud_upload),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
 
 
+                ),
               ),
 
             ],
           ),
           SizedBox(height: 50,),
+          /*
+          * Al presionar el boton 'Crear' se sube la imagen a la storage y se sube el recibo a la base de datos
+          * luego se limpian los valores y los TextFiled y la imagen
+          * */
           RaisedButton(
             color: Colors.black,
             textColor: Colors.white,
             child: Text('Crear'),
+
             onPressed: () async{
               if(image!=null) {
                 var url = await StorageService(uid: user.uid).startUpload(image);
-                _databaseService.addRecibo(
-                    descripcion, number, url, titulo);
+                databaseService.addRecibo(descripcion, number, url, titulo);
               }
-              controladorTitulo.clear();
-              controladorDescripcion.clear();
-              textoEntrada.controller.clear();
+              else{
+                databaseService.addRecibo(descripcion, number, '', titulo);
+              }
+              _controladorTitulo.clear();
+              _controladorDescripcion.clear();
+              _textoEntrada.controller.clear();
               setState(() {
                 image=null;
               });

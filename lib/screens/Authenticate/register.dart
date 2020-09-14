@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 
 class Register extends StatefulWidget {
-
+  /*
+  * Requiere un cambio de vista para cambiar de registro a Inicio de sesion,
+  * */
   final Function toggleView;
   Register ({this.toggleView});
   @override
@@ -19,14 +21,18 @@ class _RegisterState extends State<Register> {
   final List<String> monedas=["Peso argentino","Euro","Dolar"];
   bool loading =false;
 
-  String email='';
-  String password1='';
-  String password2='';
-  String error='';
+  String _email='';
+  String _password1='';
+  String _password2='';
+  String _error='';
   String _currentmoneda='Peso argentino';
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return loading ? Loading() :Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       decoration:BoxDecoration(
         gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -34,48 +40,61 @@ class _RegisterState extends State<Register> {
 
         ),
       ),
+
+
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text("Register",style: TextStyle(color: Colors.black87),),
+          title: Text("Registro",style: TextStyle(color: Colors.black87),),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
+
+
         body: SingleChildScrollView(
+
           child: Container(
               padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 50.0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+
                     SizedBox(height: 20.0),
+
                     TextFormField(
                       decoration: textInputDecoration.copyWith(hintText:'Email',fillColor: Colors.deepPurple[700]),
-                      validator: (val) => val.isEmpty ?'Enter an email':null,
+                      validator: (val) => val.isEmpty ?'Ingrese un email':null,
                       onChanged: (val){
-                        setState(()=> email = val);
+                        setState(()=> _email = val);
                       },
                     ),
+
                     SizedBox(height: 20.0),
+
                     TextFormField(
-                      decoration: textInputDecoration.copyWith(hintText:'Password',fillColor: Colors.deepPurple[500]),
+                      decoration: textInputDecoration.copyWith(hintText:'Contraseña',fillColor: Colors.deepPurple[500]),
                       obscureText: true,
-                      validator: (value) => value.length<6 ?'Enter a password 6+ chars long':null,
+                      validator: (value) => value.length<6 ?'Ingrese una contraseña con mas de 6 digitos':null,
                       onChanged: (value){
-                        setState(()=> password1 = value);
+                        setState(()=> _password1 = value);
                       },
                     ),
+
                     SizedBox(height: 20.0),
+
                     TextFormField(
-                      decoration: textInputDecoration.copyWith(hintText:'Repeat Password',fillColor: Colors.deepPurple[400]),
+                      decoration: textInputDecoration.copyWith(hintText:'Repetir Contraseña',fillColor: Colors.deepPurple[400]),
                       obscureText: true,
-                      validator: (value) => value!=password1 ? 'Las contraseñas no coinciden':null,
+                      validator: (value) => value!=_password1 ? 'Las contraseñas no coinciden':null,
                       onChanged: (value){
-                        setState(()=> password2 = value);
+                        setState(()=> _password2 = value);
                       },
                     ),
+
                     SizedBox(height: 20.0),
+
                     DropdownButtonFormField(
                       dropdownColor: Colors.deepPurple[100],
                       focusColor: Colors.amber,
@@ -91,7 +110,9 @@ class _RegisterState extends State<Register> {
                        },
 
                       ),
+
                     SizedBox(height: 20.0),
+
                     ButtonTheme(
                       minWidth: 200.0,
                       height: 50.0,
@@ -99,7 +120,7 @@ class _RegisterState extends State<Register> {
                         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20.0)),
                         color: Colors.black87,
                         child: Text(
-                          'Register',
+                          'Registrar',
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async{
@@ -107,17 +128,20 @@ class _RegisterState extends State<Register> {
                             setState(() {
                               loading=true;
                             });
-                            dynamic result = await _authService.registerWithEmailAndPassword(email, password2,_currentmoneda);
+                            /*
+                            *result devuelve el usuario registrado en cambio si devuelve un String se evalua el error obtenido
+                            * */
+                            dynamic result = await _authService.registerWithEmailAndPassword(_email, _password2,_currentmoneda);
                             if(result == 'ERROR_EMAIL_ALREADY_IN_USE'){
                               setState(() {
-                                error = 'Este email ya esta en uso ';
+                                _error = 'Este email ya esta en uso ';
                                 loading =false;
                               });
                             }
                             else{
                               if(result == 'ERROR_INVALID_EMAIL'){
                                 setState(() {
-                                  error = 'Ingrese un email valido ';
+                                  _error = 'Ingrese un email valido ';
                                   loading =false;
                                 });
                               }
@@ -126,15 +150,17 @@ class _RegisterState extends State<Register> {
                         },
                       ),
                     ),
+
                     SizedBox(height:12.0),
+
                     FlatButton.icon(
                         onPressed: (){
                           widget.toggleView();
                         },
                         icon: Icon(Icons.person),
-                        label: Text('Sign In')),
+                        label: Text('Inicio Sesion')),
                     Text(
-                      error,
+                      _error,
                       style: TextStyle(color: Colors.red[700],fontSize: 17.0),
                     ),
                   ],

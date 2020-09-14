@@ -2,6 +2,7 @@ import 'package:billetera_virtual/services/auth.dart';
 import 'package:billetera_virtual/shared/constans.dart';
 import 'package:billetera_virtual/shared/loading.dart';
 import 'package:flutter/material.dart';
+
 class SingIn extends StatefulWidget {
 
   final Function toggleView;
@@ -16,9 +17,9 @@ class _SingInState extends State<SingIn> {
   final _formKey =GlobalKey<FormState>();
   //bool loading =false;
 
-  String email='';
-  String password='';
-  String error='';
+  String _email='';
+  String _password='';
+  String _error='';
   bool loading=false;
   @override
   Widget build(BuildContext context) {
@@ -32,12 +33,15 @@ class _SingInState extends State<SingIn> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+
         appBar: AppBar(
-          title: Text("Sign In",style: TextStyle(color: Colors.black87),),
+          title: Text("Inicio Sesion",style: TextStyle(color: Colors.black87),),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
+
+
         body: SingleChildScrollView(
           child: Container(
               padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 50.0),
@@ -45,24 +49,30 @@ class _SingInState extends State<SingIn> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+
                     SizedBox(height: 20.0),
+
                     TextFormField(
                       decoration: textInputDecoration.copyWith(hintText:'Email',fillColor: Colors.deepPurple[700]),
-                      validator: (val) => val.isEmpty ?'Enter an email':null,
+                      validator: (val) => val.isEmpty ?'Ingrese un email':null,
                       onChanged: (val){
-                        setState(()=> email = val);
+                        setState(()=> _email = val);
                       },
                     ),
+
                     SizedBox(height: 20.0),
+
                     TextFormField(
-                      decoration: textInputDecoration.copyWith(hintText:'Password',fillColor: Colors.deepPurple[500]),
+                      decoration: textInputDecoration.copyWith(hintText:'Contraseña',fillColor: Colors.deepPurple[500]),
                       obscureText: true,
-                      validator: (value) => value.length<6 ?'Enter a password 6+ chars long':null,
+                      validator: (value) => value.length<6 ?'Ingrese una contraseña con mas de 6 digitos':null,
                       onChanged: (value){
-                        setState(()=> password = value);
+                        setState(()=> _password = value);
                       },
                     ),
+
                     SizedBox(height: 20.0),
+
                     ButtonTheme(
                       minWidth: 200.0,
                       height: 50.0,
@@ -70,16 +80,16 @@ class _SingInState extends State<SingIn> {
                         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20.0)),
                         color: Colors.black87,
                         child: Text(
-                          'Sign In',
+                          'Iniciar Sesion',
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async{
                           if(_formKey.currentState.validate()){
                             setState(() => loading = true);
-                            dynamic result = await _authService.signInWithEmailAndPassword(email, password);
+                            dynamic result = await _authService.signInWithEmailAndPassword(_email, _password);
                             if(result == null){
                               setState((){
-                                error = 'could not sign in with those credential ';
+                                _error = 'Usuario/contraseña incorrecta ';
                                 loading = false;
                               });
                             }
@@ -87,15 +97,17 @@ class _SingInState extends State<SingIn> {
                         },
                       ),
                     ),
+
                     SizedBox(height:12.0),
+
                     FlatButton.icon(
                         onPressed: (){
                           widget.toggleView();
                         },
                         icon: Icon(Icons.person),
-                        label: Text('Sign up')),
+                        label: Text('Crear una cuenta')),
                     Text(
-                      error,
+                      _error,
                       style: TextStyle(color: Colors.red,fontSize: 14.0),
                     ),
                   ],

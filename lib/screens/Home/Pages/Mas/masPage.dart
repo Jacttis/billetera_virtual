@@ -1,4 +1,5 @@
 import 'file:///D:/ProyectoDart/billetera_virtual/lib/screens/Home/Pages/Mas/SingleCard.dart';
+import 'package:billetera_virtual/screens/Home/Pages/Mas/UsuarioPage.dart';
 import 'package:billetera_virtual/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -12,8 +13,6 @@ class MasPage extends StatefulWidget{
 
 class _MasPageState extends State<MasPage> {
   final AuthService _auth=AuthService();
-  String currencyPath='html/currency.html';
-  WebViewController _webViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +20,12 @@ class _MasPageState extends State<MasPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
+
       appBar: AppBar(
         title: Text("Configuraciones"),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+
         actions: [
           FlatButton.icon(
               onPressed: ()async {
@@ -35,11 +36,18 @@ class _MasPageState extends State<MasPage> {
               label: Text('logout'))
         ],
       ),
-      body: GridView.count(
+
+        /*
+        * Creo un GridView de 2 columnas ,Cada hijo es una SingleCard
+        * */
+        body: GridView.count(
 
         crossAxisCount: 2,
+
         children:[
-           SingleCard(icono: Icon(Icons.attach_money,size: 85.0,color: Colors.black,),texto: 'Divisas',contexto: context,pagina: Divisa()).crearCarta(),
+           SingleCard(icono: Icon(Icons.attach_money,size: 85.0,color: Colors.black,),texto: 'Divisas',contexto: context,pagina: Divisa(),lista: true).crearCarta(),
+          SingleCard(icono: Icon(Icons.account_circle,size: 85.0,color: Colors.black,),texto: 'Usuario',contexto: context,pagina: UsuarioPage(),lista: true).crearCarta(),
+          SingleCard(icono: Icon(Icons.group,size: 85.0,color: Colors.black,),texto: 'Grupos',contexto: context,lista: false).crearCarta(),
         ],
       )
     );

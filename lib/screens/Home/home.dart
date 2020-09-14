@@ -22,6 +22,9 @@ class _HomeState extends State<Home> {
 
   Widget _showPage=new Cuenta();
 
+  /*
+   *Devuelve la pagina elegida
+  * */
   Widget _pageChooser(int page){
     switch(page){
       case 0:return _cuenta;break;
@@ -34,21 +37,31 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        /*
+        * Barra de Navegacion
+        * */
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           backgroundColor: Colors.deepPurple[400],
           color: Colors.deepPurple[400],
           items: <Widget>[
+
             Icon(Icons.account_balance_wallet, size: 30),
             Icon(Icons.add_circle, size: 30),
-            Icon(Icons.settings, size: 30),
+            Icon(Icons.more_horiz, size: 30,),
           ],
+
+          /*
+          * Funcion que Setea la pagina del icono seleccionado
+          * */
           onTap: (index) {
             setState(() {
               _showPage  = _pageChooser(index);
             });
           },
         ),
+
+
         body: Container(
           padding: EdgeInsets.only(bottom: 10.40),
           decoration:BoxDecoration(

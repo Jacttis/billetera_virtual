@@ -16,11 +16,15 @@ class HistorialList extends StatefulWidget {
 class _HistorialListState extends State<HistorialList> {
   @override
   Widget build(BuildContext context) {
-    //final user = Provider.of<User>(context);
+    /*
+    * Lista de recibos(historial) y IDRecibos( IDRecibos) dadas por Stream Provider
+    * */
     final historial = Provider.of<List<Recibo>>(context) ?? [];
-    final recibos=Provider.of<List<Text>>(context) ?? [];
+    final IDRecibos = Provider.of<List<Text>>(context) ?? [];
 
-    // Calcula el total de la lista
+
+    // Calcula el Saldo total de la lista
+
     double _calcularTotal(){
       double _total=0;
       historial.forEach((element) {
@@ -32,17 +36,33 @@ class _HistorialListState extends State<HistorialList> {
     return Container(
 
       child: Column(
+
         children: <Widget>[
           Text("Saldo:",style: TextStyle(fontSize:40.0 ),),
-          Text("\$"+_calcularTotal().toStringAsFixed(3),style: TextStyle(fontSize: 34.0),),
-          SizedBox(height: 20.0,),
-          Expanded( // Expando el container para que entre en la aplicacion
-            child: ListView.builder(//creo un constructor de lista
 
-                  itemCount: historial.length, // con esto la hago infinita
-                  itemBuilder: (context,index){ //Esto me da el contexto de la lista y que posicion esta
-                    return Dismissible( //Se encarga de realizar una accion al direccionar el widget hacia un lado
+          Text("\$"+_calcularTotal().toStringAsFixed(3),style: TextStyle(fontSize: 34.0,fontWeight: FontWeight.w900),),
+
+          SizedBox(height: 20.0,),
+          /*
+          * Expande la lista para que rellene la pantalla
+          * */
+          Expanded(
+            /*
+            * Lista creada con el constructor .builder para darle el item
+            * */
+            child: ListView.builder(
+                  // Convierte la lista en infinita
+                  itemCount: historial.length,
+
+                  //Esto me da el contexto de la lista y que posicion esta
+                  itemBuilder: (context,index){
+                    /*
+                    * Devuelve un Dismissible que su funcion convertir al hijo en dismissible
+                    * y que se pueda realizar una funcion al mover el objeto hacia una direccion especifica
+                    * */
+                    return Dismissible(
                       direction: DismissDirection.endToStart,
+
                       background: Container(
                         width: 6,
                         alignment: Alignment.centerRight,
@@ -50,13 +70,18 @@ class _HistorialListState extends State<HistorialList> {
                         color: Colors.redAccent[400],
                         child: Icon(Icons.delete, color: Colors.white),
                       ),
+
                       confirmDismiss: (direction) {
+
                         return showDialog(
                           context: context,
                           builder: (context) {
+                            /*
+                            * Alerta en pantalla para decidir si quiere eliminarlo
+                            * */
                             return CupertinoAlertDialog(
                               title: Text('Esta seguro que desea eliminarlo?'),
-                              content: Text('Delete'),
+                              content: Text('Eliminar'),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
@@ -83,23 +108,27 @@ class _HistorialListState extends State<HistorialList> {
                           },
                         );
                       },
-                      // Each Dismissible must contain a Key. Keys allow Flutter to
-                      // uniquely identify widgets.
+                      /*
+                      * Cada Dismissible debe tener una key que permita a flutter identificar los widgets
+                      * */
                       key: UniqueKey(),
-                      // Provide a function that tells the app
-                      // what to do after an item has been swiped away.
+
+                      /*
+                      * Provee una funcion que le indica a la app que hacer despues de swiped a un lado
+                      * */
                       onDismissed: (direction) {
-                        // Remove the item from the data source.
+                        // Elimina el elemento.
                         setState(() {
                           historial.removeAt(index);
-                          DatabaseService.getInstaceC().deleteRecibo(recibos.elementAt(index).data);
+                          DatabaseService.getInstaceC().deleteRecibo(IDRecibos.elementAt(index).data);
                         });
 
-                        // Show a snackbar. This snackbar could also contain "Undo" actions.
+                        // Muestra a snackbar.
                         Scaffold
                             .of(context)
                             .showSnackBar(SnackBar(content: Text(" Recibo eliminado")));
                       },
+
                       child: HistorialTile(recibo: historial[index]),
                     );
                   },

@@ -12,11 +12,19 @@ class Cuenta extends StatelessWidget {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context); // devuelve el usuario activo
+    /*
+    * Devuelve 2 StreamProvider que uno de valor tiene una lista de id de recibos,
+    * el otro tiene una lista de Recibos ordenados de la misma manera para un mejor manejo
+    * y el cuerpo del Scaffold es un HistorialList
+    * */
     return StreamProvider<List<Text>>.value( //Devuelve un Stream de una lista de ID de recibos
+
       value:DatabaseService.getInstaceC().obtenerIDRecibo(),//aca se obtiene el valor del stream
+
       child: StreamProvider<List<Recibo>>.value(
+
         value: DatabaseService.getInstaceC().obtenerRecibos(),
+
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -24,6 +32,7 @@ class Cuenta extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
           ),
+
           body: HistorialList(),
         ),
       ),
