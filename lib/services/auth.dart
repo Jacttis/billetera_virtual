@@ -7,21 +7,20 @@ import 'package:flutter/services.dart';
 class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //create user obj on FirebaseUSer
+
+  //crea un User a partir de un FirebaseUser
   User _userFromFirebaseUser(FirebaseUser user){
     return user != null ? User(uid: user.uid) :null;
-
   }
 
-  //auth change user stream
-
+  //Obtiene el user del Stream.
   Stream<User> get user{
     return _auth.onAuthStateChanged
         .map(_userFromFirebaseUser);
   }
 
 
-  //sign in anon
+  //Iniciar sesion en anonimo (No se usa en el momento)
   Future signInAnon() async{
     try{
       AuthResult result = await _auth.signInAnonymously();
@@ -36,7 +35,9 @@ class AuthService{
   }
 
 
-  //sign in with email & password
+  /*Iniciar sesion con email y contraseña
+  * .
+  * */
   Future signInWithEmailAndPassword(String email,String password)async{
     try{
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -51,7 +52,10 @@ class AuthService{
 
   }
 
-  //register with email & password
+  /*Registrar Con email y contraseña
+  * Si hay un error devuelve un string con el error obtenido
+  * */
+
   Future registerWithEmailAndPassword(String email,String password,String moneda)async{
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -66,7 +70,7 @@ class AuthService{
 
   }
 
-  //sign out
+  //Cerrar sesion, Cierra la base da datos
   Future singOut() async{
     try{
       DatabaseService.SignOut();

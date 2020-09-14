@@ -10,12 +10,14 @@ class StorageService{
   String uid;
   StorageService({this.uid});
 
+  /*
+  * Sube la foto al Storage de la base de datos
+  * */
   Future startUpload(File image) async{
     String path='$uid/'+image.path;
     _uploadTask=_storage.ref().child(path).putFile(image);
     StorageTaskSnapshot taskSnapshot = await _uploadTask.onComplete;
     return taskSnapshot.ref.getDownloadURL();
-    print('Completado');
   }
 
 

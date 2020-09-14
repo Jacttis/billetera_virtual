@@ -1,5 +1,6 @@
 
 import 'package:billetera_virtual/models/Recibo.dart';
+import 'package:billetera_virtual/models/UsuarioInfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,11 +10,15 @@ class DatabaseService {
 
    String uid;
   static DatabaseService _instance=null;
-
+/*
+* Constructor interno del Singleton
+* */
   DatabaseService._internal(String uidd){
     uid=uidd;
   }
-
+  /*
+  * Obtiene la instancia a partir de un uid, o permita Crearla
+  * */
   static DatabaseService getInstance(String uid){
     if(_instance==null){
       _instance=new DatabaseService._internal(uid);
@@ -21,10 +26,16 @@ class DatabaseService {
       return _instance;
 
   }
+  /*
+  * Si ya esta creada la instancia la devuelve
+  * */
   static DatabaseService getInstaceC(){
     return _instance;
   }
 
+  /*
+  * Convierte la instacia nula despues de Cerrar Sesion
+  * */
   static void SignOut(){
     _instance=null;
   }
@@ -32,6 +43,8 @@ class DatabaseService {
   //collection reference
   final CollectionReference collection = Firestore.instance.collection(
       'Historiales');
+  final CollectionReference collectionU = Firestore.instance.collection(
+      'Usuarios');
   final firestoreInstance = Firestore.instance;
 
   // Hace un update de la base de datos del usuario al crear una cuenta de en la aplicacion
@@ -45,15 +58,18 @@ class DatabaseService {
       'descripcion':'cuenta nueva',
       'creado':Timestamp.now()
     });
-    return await collection.document(uid).setData({
-      'name': name,
+    return await collectionU.document(uid).setData({
+      'nombre': name,
       'moneda': moneda,
+      'creado':Timestamp.now(),
 
     });
   }
-// Añado un Recibo a la base de datos de dicho user con la descripcion (desc) y la cantidad(cant) pasada como parametro
-  Future addRecibo(String desc,double cant,String path,String tit) async {
 
+// Añado un Recibo a la base de datos de dicho user con la descripcion (desc) y la cantidad(cant), el path de la imagen y el titulo del recibo pasada como parametro
+  Future addRecibo(String desc,double cant,String path,String tit) async {
+    print('entra');
+    print('$uid');
    return await collection.document(uid).collection('Recibos').document().setData({
       'descripcion': desc,
       'cantidad': cant,
@@ -97,10 +113,25 @@ class DatabaseService {
       );
     }).toList();
   }
+
 //Esto se llama en la pagina Home para que al obtener recibos consulte la base de datos y la devuelva mapeando al metodo _reciboFromsnapshot
   Stream<List<Recibo>> obtenerRecibos() {
     String path ='/Historiales/$uid/Recibos';
     return firestoreInstance.collection(path).orderBy('creado',descending: true).snapshots().map(_reciboListFromSnapshot);
+  }
+
+  Stream<List<UsuarioInfo>> obtenerUsuario() {
+    String path ='/Usuarios/$uid';
+    return firestoreInstance.collection(path).orderBy('creado',descending: true).snapshots().map(_usuarioListFromSnapshot);
+  }
+  List<UsuarioInfo> _usuarioListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return UsuarioInfo(
+          moneda: doc.data['moneda'] ?? '',
+          nombre: doc.data['nombre']?? '',
+          creacion: doc.data['creacion'],
+      );
+    }).toList();
   }
 
 }

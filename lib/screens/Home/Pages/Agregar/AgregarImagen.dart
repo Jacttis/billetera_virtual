@@ -9,7 +9,9 @@ class AgregarImagen{
   final picker=ImagePicker();
   final FirebaseStorage _storage = FirebaseStorage(storageBucket: 'gs://billeteravirtual-92474.appspot.com');
 
-  StorageUploadTask _uploadTask;  
+  /*
+  * Obtener imagen desde la camara.
+  * */
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     image = File(pickedFile.path);

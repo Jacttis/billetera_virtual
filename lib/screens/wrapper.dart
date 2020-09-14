@@ -12,8 +12,14 @@ import 'Home/home.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /*
+    * Usuario actual
+    * */
     final user = Provider.of<User>(context);
-    //return either home or authenticate widget
+
+    /*
+    * Si el Usuario Actual es nulo entonces devuelve la pagina de Autentificacion, si no devuelve la pantalla home.
+    * */
     if(user == null){
       return Authenticate();
     }

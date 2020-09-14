@@ -8,8 +8,10 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-
   bool showSign = true;
+  /*
+  *Funcion para Cambiar de vista de Registro a Inicio de sesion
+  * */
   void toggleView(){
     setState(() => showSign = !showSign);
   }

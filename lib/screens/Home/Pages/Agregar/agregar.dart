@@ -13,17 +13,16 @@ class Agregar extends StatefulWidget {
 
 class _AgregarState extends State<Agregar> {
 
-  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text('Agregar'),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-      ),
+      ),*/
       body:AgregarView(),
     );
 

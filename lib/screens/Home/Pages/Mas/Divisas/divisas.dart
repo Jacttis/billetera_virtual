@@ -24,6 +24,9 @@ class _DivisaState extends State<Divisa> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
+      /*
+      * Carga el valor del html y lo convierte en una pagina dentro de la apliacion con la funcion(_loadHtmlFromAssets())
+      * */
       body: WebView(
         initialUrl: '',
         javascriptMode: JavascriptMode.unrestricted,
