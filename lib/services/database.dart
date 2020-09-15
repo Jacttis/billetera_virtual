@@ -62,8 +62,18 @@ class DatabaseService {
       'nombre': name,
       'moneda': moneda,
       'creado':Timestamp.now(),
+      'path':'',
 
     });
+  }
+
+  Future actualiarPerfil(String nombre,String moneda,String path) async{
+    return await collectionU.document(uid).setData({
+      'nombre':nombre,
+      'moneda':moneda,
+      'path':path
+        });
+
   }
 
 // Añado un Recibo a la base de datos de dicho user con la descripcion (desc) y la cantidad(cant), el path de la imagen y el titulo del recibo pasada como parametro
@@ -120,18 +130,20 @@ class DatabaseService {
     return firestoreInstance.collection(path).orderBy('creado',descending: true).snapshots().map(_reciboListFromSnapshot);
   }
 
-  Stream<List<UsuarioInfo>> obtenerUsuario() {
-    String path ='/Usuarios/$uid';
-    return firestoreInstance.collection(path).orderBy('creado',descending: true).snapshots().map(_usuarioListFromSnapshot);
+  Stream<UsuarioInfo> obtenerUsuario() {
+    print('$uid');
+    return collectionU.document("$uid").snapshots().map(_usuarioFromSnapshot);
+
   }
-  List<UsuarioInfo> _usuarioListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
+
+  UsuarioInfo _usuarioFromSnapshot(DocumentSnapshot doc) {
       return UsuarioInfo(
           moneda: doc.data['moneda'] ?? '',
           nombre: doc.data['nombre']?? '',
           creacion: doc.data['creacion'],
+          path: doc.data['path']??'',
       );
-    }).toList();
+
   }
 
 }

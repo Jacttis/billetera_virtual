@@ -49,6 +49,7 @@ class _AgregarViewState extends State<AgregarView> {
     decoration: textInputDecoration.copyWith(hintText:'\$\$\$',fillColor: Colors.deepPurple[700], icon: Icon(Icons.remove,color: Colors.black,),),
     textAlign: TextAlign.right,
   );
+
   //Guarda el valor de la entrada dependiendo de si es un gasto o un ingreso
   TextFormField _textoEntrada=_entradaCantidadNegativa;
 
@@ -94,14 +95,17 @@ class _AgregarViewState extends State<AgregarView> {
                 textStyle: TextStyle(fontSize: 16)),
             /*
             * Cambia el valor de la entrada de texto  depende de la opcion obtenida
+            * Si se cambia de gasto a ingreso se limpia el valor
             * */
             radioButtonValue: (value) {
               setState(() {
                 if(value =='GASTO'){
                   _textoEntrada=_entradaCantidadNegativa;
+                  _textoEntrada.controller.clear();
                 }
                 else{
                   _textoEntrada=_entradaCantidadPositiva;
+                  _textoEntrada.controller.clear();
                 }
               });
             },
@@ -128,7 +132,7 @@ class _AgregarViewState extends State<AgregarView> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white70, width: 2.0),
                 ),
-                hintText: 'titulo',
+                hintText: 'Título',
                 contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                 border: OutlineInputBorder(borderSide: new BorderSide(color: Colors.black)),
                 isDense: true,
@@ -164,7 +168,7 @@ class _AgregarViewState extends State<AgregarView> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white70, width: 2.0),
                 ),
-                  hintText: 'Descripcion',
+                  hintText: 'Descripción',
                   contentPadding: new EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
                   border: OutlineInputBorder(borderSide: new BorderSide(color: Colors.black)),
                   isDense: true,
@@ -209,7 +213,7 @@ class _AgregarViewState extends State<AgregarView> {
                 width:MediaQuery.of(context).size.width-150,
                 child: RaisedButton.icon(
                   textColor: Colors.white,
-                  color: Colors.black87,
+                  color: Colors.black38,
                   label: Text('Subir Imagen'),
                   onPressed: ()async {
                       image= await logicaFoto.getImage();
@@ -229,35 +233,45 @@ class _AgregarViewState extends State<AgregarView> {
 
             ],
           ),
-          SizedBox(height: 50,),
+          SizedBox(height: MediaQuery.of(context).size.height-600,),
           /*
           * Al presionar el boton 'Crear' se sube la imagen a la storage y se sube el recibo a la base de datos
           * luego se limpian los valores y los TextFiled y la imagen
+          * Si no se completo la cantidad deseada y el titulo no se crea y se avisa al usuario
           * */
           RaisedButton(
-            color: Colors.black,
+            color: Colors.black38,
             textColor: Colors.white,
             child: Text('Crear'),
 
             onPressed: () async{
-              if(image!=null) {
-                var url = await StorageService(uid: user.uid).startUpload(image);
-                databaseService.addRecibo(descripcion, number, url, titulo);
+              if(_textoEntrada.controller.text!='' && _controladorTitulo.text!='') {
+                if (image != null) {
+                  var url = await StorageService(uid: user.uid).startUpload(
+                      image);
+                  databaseService.addRecibo(descripcion, number, url, titulo);
+                }
+                else {
+                  databaseService.addRecibo(descripcion, number, '', titulo);
+                }
+                _controladorTitulo.clear();
+                _controladorDescripcion.clear();
+                _textoEntrada.controller.clear();
+                setState(() {
+                  image = null;
+                });
+
+                Scaffold
+                    .of(context)
+                    .showSnackBar(SnackBar(content: Text(" Recibo Creado"),
+                  backgroundColor: Colors.black,));
               }
               else{
-                databaseService.addRecibo(descripcion, number, '', titulo);
+                Scaffold
+                    .of(context)
+                    .showSnackBar(SnackBar(content: Text("No se pudo crear el recibo \nTitulo y Cantidad(\$\$\$) obligatoria"),
+                  backgroundColor: Colors.black,));
               }
-              _controladorTitulo.clear();
-              _controladorDescripcion.clear();
-              _textoEntrada.controller.clear();
-              setState(() {
-                image=null;
-              });
-
-              Scaffold
-                  .of(context)
-                  .showSnackBar(SnackBar(content: Text(" Recibo Creado")));
-
             },
           )
 

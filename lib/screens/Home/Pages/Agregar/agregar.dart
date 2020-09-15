@@ -18,11 +18,6 @@ class _AgregarState extends State<Agregar> {
     return  Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
-      /*appBar: AppBar(
-        title: Text('Agregar'),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),*/
       body:AgregarView(),
     );
 
