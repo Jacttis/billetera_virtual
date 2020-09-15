@@ -78,8 +78,6 @@ class DatabaseService {
 
 // Añado un Recibo a la base de datos de dicho user con la descripcion (desc) y la cantidad(cant), el path de la imagen y el titulo del recibo pasada como parametro
   Future addRecibo(String desc,double cant,String path,String tit) async {
-    print('entra');
-    print('$uid');
    return await collection.document(uid).collection('Recibos').document().setData({
       'descripcion': desc,
       'cantidad': cant,
@@ -131,7 +129,6 @@ class DatabaseService {
   }
 
   Stream<UsuarioInfo> obtenerUsuario() {
-    print('$uid');
     return collectionU.document("$uid").snapshots().map(_usuarioFromSnapshot);
 
   }
