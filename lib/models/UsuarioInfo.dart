@@ -5,6 +5,7 @@ class UsuarioInfo{
   final String nombre;
   final Timestamp creacion;
   final String moneda;
+  final String path;
 
-  UsuarioInfo({this.moneda,this.nombre,this.creacion});
+  UsuarioInfo({this.moneda,this.nombre,this.creacion,this.path});
 }

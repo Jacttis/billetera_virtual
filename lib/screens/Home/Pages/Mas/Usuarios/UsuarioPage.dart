@@ -1,4 +1,5 @@
 import 'package:billetera_virtual/models/User.dart';
+import 'package:billetera_virtual/screens/Home/Pages/Mas/Usuarios/usuarioPageView.dart';
 import 'package:billetera_virtual/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,20 +12,17 @@ class UsuarioPage extends StatefulWidget {
 class _UsuarioPageState extends State<UsuarioPage> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-    return Container();/*StreamProvider.value(
+    return StreamProvider.value(
       value: DatabaseService.getInstaceC().obtenerUsuario(),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text('Cuenta'),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
+          backgroundColor: Colors.deepPurple[700],
+          elevation: 1,
         ),
-        body: Container(
-
-        ),
+        body: UsuarioPageView(),
       ),
-    );*/
+    );
   }
 }

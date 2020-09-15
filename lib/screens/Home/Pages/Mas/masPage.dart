@@ -1,5 +1,5 @@
 import 'file:///D:/ProyectoDart/billetera_virtual/lib/screens/Home/Pages/Mas/SingleCard.dart';
-import 'package:billetera_virtual/screens/Home/Pages/Mas/UsuarioPage.dart';
+import 'file:///D:/ProyectoDart/billetera_virtual/lib/screens/Home/Pages/Mas/Usuarios/UsuarioPage.dart';
 import 'package:billetera_virtual/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -22,7 +22,7 @@ class _MasPageState extends State<MasPage> {
       backgroundColor: Colors.transparent,
 
       appBar: AppBar(
-        title: Text("Configuraciones"),
+        title: Text("Mas Opciones"),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
 
@@ -33,7 +33,7 @@ class _MasPageState extends State<MasPage> {
 
               },
               icon: Icon(Icons.person),
-              label: Text('logout'))
+              label: Text('Cerrar Sesion'))
         ],
       ),
 
